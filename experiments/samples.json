@@ -1,0 +1,23 @@
+[
+  {
+    "id": "S1",
+    "motion": "Should adults be required to pass tests before becoming parents?",
+    "side": "Against",
+    "coach": {"percent": 25, "clarity": 2, "evidence": 2, "impact": 1, "logic": 2},
+    "text": "The way this topic is presented raises all the right questions. There have always been parents who should never have been parents and very good parents. The real question, then, is why do we strive for everything to be perfect and controllable, and why are our societies today no longer capable of integrating the flaws and failures inherent in being human? Do we want to normalize the role of parent through tests that we can easily imagine will be biased, manipulated, and controlling? Let's put humanity back at the center of everything and find a way to define and regulate imperfections and failures. It's like laws on assisted dying that border on euthanasia: our current societies are no longer capable of internalizing suffering and failures; everything has to be smooth and perfect. This is a fundamental error. Let's accept our human condition as it is. So no, not tests, but strong education and appropriate legal frameworks."
+  },
+  {
+    "id": "S2",
+    "motion": "Should the right to privacy be treated as absolute?",
+    "side": "Against",
+    "coach": {"percent": 75, "clarity": 3, "evidence": 1, "impact": 3, "logic": 4},
+    "text": "Just because a right is fundamental doesn't mean it can't be modified. No right is absolute. In the hierarchy of rights, the right to privacy is fundamental because it is a cornerstone of individual liberty and serves as a safeguard against intrusive state action. When a right is fundamental, it is more difficult for the state to restrict its exercise. Privacy must be preserved because it is the space where individuals can freely express their identity, opinions, and values without fear of reprisal or surveillance."
+  },
+  {
+    "id": "S3",
+    "motion": "Should university lecture attendance be optional?",
+    "side": "For",
+    "coach": {"percent": 92, "clarity": 4, "evidence": 5, "impact": 4, "logic": 5},
+    "text": "\"He who lets the world, or his own portion of it, choose his plan of life for him has no need of any other faculty than the ape-like one of imitation.\" - John Stuart Mill, On Liberty (1859)\nStudents who attend lectures when it is not required operate at a different level than those who attend because they have to. Voluntary attendance reflects awareness, choice, and accountability. The student has already evaluated the consequences and decided the lecture has value.\nMandatory attendance removes that distinction. It treats intentional effort and forced compliance as equivalent, even though they are not. A student who is present by requirement may be disengaged, while a student who chooses to be there is aligned with the goal.\nOptional systems make that difference visible. They reveal who is acting with purpose rather than obligation. And that alignment between choice and action is what produces stronger outcomes, not attendance itself."
+  }
+]

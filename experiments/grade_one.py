@@ -1,3 +1,19 @@
+import re
+import unicodedata
+
+_PUNCT_MAP = str.maketrans({
+    "\u2018": "'", "\u2019": "'", "\u201a": "'", "\u201b": "'",
+    "\u201c": '"', "\u201d": '"', "\u201e": '"', "\u201f": '"',
+    "\u2013": "-", "\u2014": "-", "\u2212": "-", "\u00a0": " ",
+})
+
+
+def canon(text):
+    """Collapse unicode, quote style and whitespace so 'verbatim' is checkable."""
+    text = unicodedata.normalize("NFKC", str(text))
+    text = text.translate(_PUNCT_MAP)
+    return re.sub(r"\s+", " ", text).strip().lower()
+
 import json
 import os
 import sys
@@ -19,9 +35,9 @@ DIMENSIONS = ["point", "mechanism", "evidence", "impact"]
 
 # Highest threshold first - the first match wins.
 LABELS = [
-    (16, "Competition-ready"),
-    (12, "Solid"),
-    (8, "Developing"),
+    (11, "Strong"),
+    (9, "Solid"),
+    (7, "Developing"),
     (4, "Foundations"),
 ]
 
@@ -108,6 +124,53 @@ GRADE_TOOL = {
     },
 }
 
+REQUIRED_FIELDS = [
+    "sufficient", "scores", "anchor_evidence", "weighing_attempted",
+    "strongest_moment", "biggest_gap", "one_fix", "rewrite_example",
+    "flags", "confidence",
+]
+
+DEFAULTS = {
+    "sufficient": False,
+    "insufficient_reason": "",
+    "scores": {},
+    "anchor_evidence": {},
+    "weighing_attempted": False,
+    "strongest_moment": {"quote": "", "why": ""},
+    "biggest_gap": "",
+    "one_fix": "",
+    "rewrite_example": {"original": "", "improved": ""},
+    "flags": [],
+    "confidence": "low",
+}
+
+
+def normalise(grade):
+    """The schema guides the model; it does not guarantee. Defend here.
+
+    Fills missing fields, coerces score types, and demotes a grade to
+    insufficient if its scores are unusable. Returns a list of problems.
+    """
+    problems = [f"missing field {k!r}" for k in REQUIRED_FIELDS if k not in grade]
+
+    for key, default in DEFAULTS.items():
+        grade.setdefault(key, default)
+
+    for d in DIMENSIONS:
+        raw = grade["scores"].get(d)
+        try:
+            value = int(raw)
+        except (TypeError, ValueError):
+            problems.append(f"scores.{d} = {raw!r} is not a number")
+            value = 0
+        grade["scores"][d] = value
+
+        if grade["sufficient"] and not 1 <= value <= 5:
+            problems.append(f"scores.{d} = {value} outside 1-5 while sufficient")
+            grade["sufficient"] = False
+            grade["insufficient_reason"] = "malformed scores"
+
+    return problems
 
 def score_grade(grade, submission_text):
     """Compute total, label and derived flags in code."""
@@ -158,10 +221,10 @@ def validate(grade, submission_text):
         if n > cap:
             problems.append(f"{field} is {n} words, cap is {cap}")
 
-    for section, key in [("strongest_moment", "quote"), ("rewrite_example", "original")]:
-        value = grade[section][key]
-        if value and value not in submission_text:
-            problems.append(f"{section}.{key} is not verbatim: {value[:50]!r}")
+        for section, key in [("strongest_moment", "quote"), ("rewrite_example", "original")]:
+            value = grade[section][key]
+            if value and canon(value) not in canon(submission_text):
+                problems.append(f"{section}.{key} is not verbatim: {value[:50]!r}")
 
     return problems
 

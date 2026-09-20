@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from grade_one import (
-    DIMENSIONS, PROMPT_PATH, grade_submission, score_grade, validate,
+    DIMENSIONS, PROMPT_PATH, grade_submission, normalise, score_grade, validate,
 )
 
 IN_PATH = Path("experiments/argument_classic.json")
@@ -30,7 +30,8 @@ def run(samples):
 
                 grade = blocks[0].input
                 computed = score_grade(grade, sample["text"])
-                problems = validate(grade, sample["text"])
+                problems = normalise(grade)
+                problems += validate(grade, sample["text"])
 
                 record = {
                     "id": sample["id"],
@@ -70,7 +71,9 @@ def summarise():
     for d in DIMENSIONS:
         counts = {s: 0 for s in range(1, 6)}
         for r in scored:
-            counts[r["scores"][d]] += 1
+            value = r["scores"][d]
+            if value in counts:
+                counts[value] += 1
         bar = "  ".join(f"{s}:{counts[s]:<3}" for s in range(1, 6))
         mean = sum(r["scores"][d] for r in scored) / len(scored)
         print(f"  {d:<10} {bar}   mean {mean:.2f}")

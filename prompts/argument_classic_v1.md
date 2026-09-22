@@ -48,8 +48,8 @@ first level that matches.
     reader must supply to get from cause to effect.
 3 - A complete chain for one claim: every step from cause to effect is stated,
     none assumed. Other claims in the argument remain asserted.
-4 - All of 3, applied to every claim the argument makes.
-5 - All of 4, and the argument names the condition under which the mechanism
+4 - As 3, applied to every claim the argument makes.
+5 - As 4, and the argument names the condition under which the mechanism
     would fail or stop applying.
 
 ## 3. EVIDENCE - what supports the claim?
@@ -60,9 +60,9 @@ first level that matches.
 2 - Support is named but not connected: an example, source or statistic is
     mentioned without explaining what it demonstrates.
 3 - Support is named and its relevance to the claim is explained.
-4 - All of 3, and the support - taken at face value - would actually establish
+4 - As 3, and the support - taken at face value - would actually establish
     the claim rather than a neighbouring question.
-5 - All of 4, and the debater addresses why this case is typical rather than a
+5 - As 4, and the debater addresses why this case is typical rather than a
     selected exception.
 
 Level 4 asks whether the support logically does the work claimed for it, NOT
@@ -77,8 +77,8 @@ unverified_factual_claim and score only the logic.
     that follows from the claim, however vague, the minimum is 2.
 2 - That it matters is asserted, with nobody named and no size given.
 3 - Names who is affected and in what way.
-4 - All of 3, and gives the size: how many, how much, how long, or how severe.
-5 - All of 4, and connects the consequence to what the motion is about - why
+4 - As 3, and gives the size: how many, how much, how long, or how severe.
+5 - As 4, and connects the consequence to what the motion is about - why
     this is the impact the debate should turn on.
 
 # SUFFICIENCY
@@ -90,6 +90,8 @@ Set sufficient = false when any of these is true:
 
 When sufficient is false, set every score to 0 and explain what was missing in
 insufficient_reason. Leave strongest_moment and rewrite_example fields empty.
+
+When sufficient is true, every score must be between 1 and 5. Never use 0.
 
 # WEIGHING - observed, not scored
 
@@ -106,10 +108,8 @@ Report only the dimension scores. Totals are computed outside this evaluation.
 
 # FLAGS
 
-# FLAGS
-
 Add any that apply. Flags are diagnostic, not penalties. Only these five exist;
-others are computed automatically from your scores.
+all others are computed automatically from your scores.
 
 unverified_factual_claim - the argument rests on a specific factual assertion
   you cannot and must not adjudicate
@@ -125,7 +125,7 @@ wrong_side - a side is given and the submission argues the opposite
   correct their factual claims. You are not a research tool.
 - Never state or imply which side of the motion is correct.
 - Quote only text the debater actually wrote, verbatim and character for
-  character. Never paraphrase and present it as a quote.
+  character. Copy it exactly as it appears, including any typos.
 - No generic praise. "Good structure" is banned. "You stated your claim in the
   opening sentence and never drifted from it" is the standard.
 - Never praise and criticise the same sentence. If a sentence has a flaw that
@@ -135,6 +135,9 @@ wrong_side - a side is given and the submission argues the opposite
 - rewrite_example must rewrite a sentence the debater actually wrote. Show the
   fix; do not describe it.
 - Obey the word caps. Truncated and precise beats complete and vague.
+- A quoted sentence must be one continuous run of text from the submission.
+  Never use "..." to join separate parts, and never shorten or tidy a quote.
+  If no single sentence fits, choose a shorter one that does.
 
 # OUTPUT
 
